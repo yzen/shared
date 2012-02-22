@@ -105,10 +105,4 @@
         args: ["{dataSource}", "{arguments}.0", "{arguments}.1"]
     });
 
-    fluid.demands("gpii.source", "gpii.preferencesServer", {
-        options: {
-            server: "{gpii.preferencesServer}.server"
-        }
-    });
-
 })();
