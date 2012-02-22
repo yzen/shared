@@ -6,7 +6,7 @@
         uuid = require("node-uuid"),
         gpii = fluid.registerNamespace("gpii");
 
-    fluid.require("../../../../../src/dataSource.js");
+    fluid.require("../../../../../shared/dataSource.js");
 
     fluid.defaults("gpii.source", {
         gradeNames: ["autoInit", "fluid.littleComponent"],
