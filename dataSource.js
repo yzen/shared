@@ -8,12 +8,14 @@
         http = require("http"),
         path = require("path"),
         eUC = "encodeURIComponent:";
+
+    fluid.require("../../../../../shared/utils.js");
         
     fluid.defaults("gpii.dataSource", {
         gradeNames: ["autoInit", "fluid.littleComponent"],
         components: {
             urlExpander: {
-                type: "gpii.dataSource.urlExpander"
+                type: "gpii.urlExpander"
             }
         },
         invokers: {
@@ -26,33 +28,11 @@
         preInitFunction: "gpii.dataSource.preInit"
     });
 
-    fluid.defaults("gpii.dataSource.urlExpander", {
-        gradeNames: ["fluid.littleComponent", "autoInit"],
-        vars: {
-            db: ""
-        },
-        finalInitFunction: "gpii.dataSource.urlExpander.finalInit"
-    });
-
     gpii.dataSource.preInit = function (that) {
         if (that.options.writable) {
             that.options.invokers.set = "gpii.dataSource.set";
         }
     };
-    
-    gpii.dataSource.urlExpander.finalInit = function (that) {
-        that.expand = function (url) {
-            return fluid.stringTemplate(url, that.options.vars);
-        };
-    };
-    
-    fluid.demands("gpii.dataSource.urlExpander", "gpii.development", {
-        options: {
-            vars: {
-                db: path.join(__dirname, "..")
-            }
-        }
-    });
 
     fluid.demands("gpii.dataSource.get", "gpii.development", {
         funcName: "gpii.dataSource.FSGet",

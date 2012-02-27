@@ -7,6 +7,7 @@
         gpii = fluid.registerNamespace("gpii");
 
     fluid.require("../../../../../shared/dataSource.js");
+    fluid.require("../../../../../shared/utils.js");
 
     fluid.defaults("gpii.source", {
         gradeNames: ["autoInit", "fluid.littleComponent"],
@@ -32,23 +33,11 @@
         finalInitFunction: "gpii.source.finalInit"
     });
 
-    gpii.source.identifyTermMap = function (path) {
-        var termMap = {};
-        fluid.each(path.match(/(:\w+)?/gi), function (param) {
-            if (!param) {
-                return;
-            }
-            param = param.substr(1);
-            termMap[param] = "%" + param;
-        });
-        return termMap;
-    };
-
     gpii.source.preInit = function (that) {
         if (that.options.writable) {
             that.options.invokers.post = "gpii.source.post";
         }
-        that.options.termMap = gpii.source.identifyTermMap(that.options.path);
+        that.options.termMap = gpii.pathToTermMap(that.options.path);
         that.server = that.options.server;
     };
 
