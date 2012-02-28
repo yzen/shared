@@ -150,10 +150,8 @@
             args = [fileName];
         if (model) {
             args.push(model);
-            args.push("utf8");
-        } else {
-            args.push("utf8");
         }
+        args.push("utf8");
         args.push(function (error, data) {
             if (error) {
                 errorCallback(error.message, error);
