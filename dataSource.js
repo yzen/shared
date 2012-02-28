@@ -148,6 +148,7 @@
     var fsAll = function (method, responseParser, resolveUrl, directModel, callback, errorCallback, model) {
         var fileName = resolveUrl(directModel),
             args = [fileName];
+        args.push("utf8");
         if (model) {
             args.push(model);
         }
